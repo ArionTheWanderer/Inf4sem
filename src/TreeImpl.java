@@ -104,6 +104,19 @@ public class TreeImpl implements Tree, Iterable {
         return root;
     }
 
+    public void attachParents() {
+        attachParents(root);
+    }
+
+    private void attachParents(TreeNode node) {
+        if (!node.children.isEmpty()) {
+            for (TreeNode child : node.children) {
+                child.parent = node;
+                attachParents(child);
+            }
+        }
+    }
+
     @Override
     public void insert(TreeNode elem) {
 
