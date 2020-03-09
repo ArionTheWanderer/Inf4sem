@@ -1,0 +1,15 @@
+7
+home
+profile(faq)
+news
+chat
+faq
+photo
+video
+profile news chat photo video
+home faq
+home profile
+home profile
+home profile
+home profile
+home profile
