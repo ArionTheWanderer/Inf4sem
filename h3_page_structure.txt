@@ -1,6 +1,6 @@
 7
 home
-profile(faq)
+profile
 news
 chat
 faq

@@ -9,6 +9,7 @@ public class Browser {
 
     Browser() {
         currentPage = PageStructure.getInstance().getStartPage();
+        System.out.println("Browser has been created! Current page is " + currentPage);
     }
 
     public Snapshot makeSnapshot() {

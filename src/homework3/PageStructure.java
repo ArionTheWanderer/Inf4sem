@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PageStructure {
-    // private boolean[][] graph;
     private static PageStructure pageStructure;
     private List<List<String>> navigation;
     private List<String> pages;
@@ -57,7 +56,6 @@ public class PageStructure {
     private void setNav() {
         try {
             int number = Integer.parseInt(br.readLine());
-            // graph = new boolean[number][number];
             navigation = new ArrayList<>();
             pages = new ArrayList<>();
             for (int i = 0; i < number; i++) {
