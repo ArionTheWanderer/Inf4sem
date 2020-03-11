@@ -1,37 +1,42 @@
 package homework3;
 
 public class Browser {
-    public String getCurrentPage() {
-        return currentPage;
+    private Page page;
+
+    public Page getCurrentPage() {
+        return page;
     }
 
-    private String currentPage;
+    public String goToAdv() {
+        page.goToAdv();
+        return page.getPage();
+    }
 
     Browser() {
-        currentPage = PageStructure.getInstance().getStartPage();
-        System.out.println("Browser has been created! Current page is " + currentPage);
+        page = Site.getInstance().getStartPage();
+        System.out.println("Browser has been created! Current page is " + page.getPage());
     }
 
     public Snapshot makeSnapshot() {
-        return new Snapshot(currentPage);
+        return new Snapshot(page);
     }
 
     public void restore(Snapshot snapshot) {
-        currentPage = snapshot.getState();
+        page = snapshot.getState();
     }
 
-    public void setCurrentPage(String currentPage) {
-        this.currentPage = currentPage;
+    public void setCurrentPage(Page page) {
+        this.page = page;
     }
 
     class Snapshot {
-        private String page;
+        private Page page;
 
-        private Snapshot(String page) {
+        private Snapshot(Page page) {
             this.page = page;
         }
 
-        private String getState() {
+        private Page getState() {
             return page;
         }
     }

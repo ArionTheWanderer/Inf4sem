@@ -25,23 +25,23 @@ public class Caretaker {
     }
 
     public String go_to(String link) {
-        if (PageStructure.getInstance().isPage(link)) {
+        if (Site.getInstance().isPage(link)) {
             addSnapshotToBackStack();
-            originator.setCurrentPage(link);
+            originator.setCurrentPage(Site.getInstance().createPage(link));
             forwardStack.clear();
             return link;
         } else
-            return originator.getCurrentPage();
+            return originator.getCurrentPage().getPage();
     }
 
     public String link(String link) {
-        if (PageStructure.getInstance().isLink(originator.getCurrentPage(), link)) {
+        if (Site.getInstance().isLink(originator.getCurrentPage().getPage(), link)) {
             addSnapshotToBackStack();
-            originator.setCurrentPage(link);
+            originator.setCurrentPage(Site.getInstance().createPage(link));
             forwardStack.clear();
             return link;
         } else
-            return originator.getCurrentPage();
+            return originator.getCurrentPage().getPage();
     }
 
     public String back() {
@@ -49,9 +49,9 @@ public class Caretaker {
             addSnapshotToForwardStack();
             Browser.Snapshot snapshot = backStack.removeFirst();
             originator.restore(snapshot);
-            return originator.getCurrentPage();
+            return originator.getCurrentPage().getPage();
         } else
-            return originator.getCurrentPage();
+            return originator.getCurrentPage().getPage();
     }
 
     public String forward() {
@@ -59,8 +59,31 @@ public class Caretaker {
             addSnapshotToBackStack();
             Browser.Snapshot snapshot = forwardStack.removeFirst();
             originator.restore(snapshot);
-            return originator.getCurrentPage();
+            return originator.getCurrentPage().getPage();
         } else
-            return originator.getCurrentPage();
+            return originator.getCurrentPage().getPage();
+    }
+
+    public int goToPosition(int position) {
+        if (position >= 0 && position <= 100) {
+            originator.getCurrentPage().setPosition(position);
+            return position;
+        }
+        else return originator.getCurrentPage().getPosition();
+    }
+
+    public String getPage() {
+        return originator.getCurrentPage().getPage();
+    }
+
+    public int getPosition() {
+        return originator.getCurrentPage().getPosition();
+    }
+
+    public String goToAdv() {
+        if (Site.getInstance().getTextOnPosition(originator.getCurrentPage().getPage(), originator.getCurrentPage().getPosition()) != null) {
+            addSnapshotToBackStack();
+        }
+        return originator.goToAdv();
     }
 }
